@@ -3,6 +3,7 @@ package za.co.bmw.vehicestock.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class Vehicle implements Serializable {
     private long id;
     
     @NotNull
+    @Column(unique = true)
     private String stockNumber;
     
     @OneToOne(cascade = CascadeType.ALL)

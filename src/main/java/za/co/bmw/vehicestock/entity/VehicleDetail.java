@@ -9,9 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Builder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 
 
 /**
@@ -20,6 +24,9 @@ import org.hibernate.annotations.UpdateTimestamp;
  */
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class VehicleDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +36,7 @@ public class VehicleDetail implements Serializable {
     private long vehicleId;
     
     @Transient
-    private String make = "BMW";
+    private final String make = "BMW";
     
     @NotNull
     private String model;
