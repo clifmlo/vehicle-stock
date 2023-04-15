@@ -1,4 +1,4 @@
-package za.co.bmw.vehicestock.service;
+package za.co.bmw.vehicestock.controller.service;
 
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +29,7 @@ public class VehicleService {
         return vehicleRepository.findById(id).get();
     }
     
-    public Vehicle updateVehicle(final VehicleDto vehicleDto) {
-        Vehicle vehicle = vehicleRepository.findById(vehicleDto.getId()).get();
-        VehicleDetail vehicleDetail = vehicle.getVehicleDetails();
-        updateDetails(vehicleDetail, vehicleDto);
-        
+    public Vehicle updateVehicle(final Vehicle vehicle) {
         return vehicleRepository.save(vehicle);
     }
 
@@ -56,14 +52,5 @@ public class VehicleService {
         Random rand = new Random();       
         return String.valueOf(1000000000 + (int) (rand.nextDouble() * 999999999)); 
     }
-    
-    private void updateDetails(VehicleDetail vehicleDetail, final VehicleDto vehicleDto) {
-       vehicleDetail.setModel(vehicleDto.getModel());
-       vehicleDetail.setModelYear(vehicleDto.getModelYear());
-       vehicleDetail.setVinNumber(vehicleDto.getVinNumber());
-       vehicleDetail.setEngineNumber(vehicleDto.getEngineNumber());
-       vehicleDetail.setEngineCapacity(vehicleDto.getEngineCapacity());
-       vehicleDetail.setFuelType(vehicleDto.getFuelType()); 
-    }
-    
+        
 }

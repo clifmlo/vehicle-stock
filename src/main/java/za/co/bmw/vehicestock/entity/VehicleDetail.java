@@ -2,7 +2,6 @@ package za.co.bmw.vehicestock.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,10 +30,7 @@ public class VehicleDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
-    @NotNull
-    private long vehicleId;
-    
+
     @Transient
     private final String make = "BMW";
     
@@ -42,7 +38,7 @@ public class VehicleDetail implements Serializable {
     private String model;
     
     @NotNull
-    private LocalDate modelYear;
+    private int modelYear;
     
     @NotNull
     private String vinNumber;

@@ -1,6 +1,5 @@
 package za.co.bmw.vehicestock.dto;
 
-import java.time.LocalDate;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +22,7 @@ public class VehicleDto {
     private String model;
     
     @NotNull
-    private LocalDate modelYear;
+    private int modelYear;
     
     @NotNull
     private String vinNumber;

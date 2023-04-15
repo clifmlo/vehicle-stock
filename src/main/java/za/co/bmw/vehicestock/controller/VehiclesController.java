@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import za.co.bmw.vehicestock.controller.service.VehicleService;
 import za.co.bmw.vehicestock.dto.VehicleDto;
-import za.co.bmw.vehicestock.service.VehicleService;
+import za.co.bmw.vehicestock.entity.Vehicle;
 
 /**
  *
@@ -27,7 +28,7 @@ public class VehiclesController {
     
     @PostMapping("/add")
     public ResponseEntity addVehicle(@Valid @RequestBody final VehicleDto vehicle){
-        return new ResponseEntity(vehicleService.addVehicle(vehicle), HttpStatus.OK);
+        return new ResponseEntity(vehicleService.addVehicle(vehicle), HttpStatus.CREATED);
     }
     
     @GetMapping("/{id}")
@@ -36,12 +37,13 @@ public class VehiclesController {
     }
     
     @PutMapping("/update")
-    public ResponseEntity updateVehicle(@Valid @RequestBody final VehicleDto vehicle){
+    public ResponseEntity updateVehicle(@Valid @RequestBody final Vehicle vehicle){
         return new ResponseEntity(vehicleService.updateVehicle(vehicle), HttpStatus.OK);
     }
     
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity updateVehicle(@PathVariable("id") final long id){
-        return new ResponseEntity(vehicleService.deleteVehicle(id), HttpStatus.OK);
+        vehicleService.deleteVehicle(id);
+        return new ResponseEntity(HttpStatus.OK);
     } 
 }

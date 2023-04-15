@@ -25,14 +25,15 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class Vehicle implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "id")
+    private long Id;
     
     @NotNull
     @Column(unique = true)
     private String stockNumber;
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vehicle_id")
+    @JoinColumn(name = "vehicle_detail_id", referencedColumnName = "id")    
     private VehicleDetail vehicleDetails;   
     
     @CreationTimestamp
