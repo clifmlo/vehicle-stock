@@ -1,6 +1,8 @@
-package za.co.bmw.vehicestock.controller.service;
+package za.co.bmw.vehicestock.service;
 
+import java.util.Optional;
 import java.util.Random;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.co.bmw.vehicestock.dto.VehicleDto;
@@ -17,6 +19,7 @@ public class VehicleService {
     @Autowired
     VehicleRepository vehicleRepository;
 
+    @Transactional
     public Vehicle addVehicle(final VehicleDto vehicleDto) {  
         Vehicle vehicle = new Vehicle();
         vehicle.setStockNumber(generateStockNumber());
@@ -26,13 +29,21 @@ public class VehicleService {
     }
     
     public Vehicle getVehicle(final long id) {
-        return vehicleRepository.findById(id).get();
+        Optional<Vehicle> vehicle = vehicleRepository.findById(id);
+        
+        if (vehicle.isEmpty()){
+            return null;
+        }
+        
+        return vehicle.get();
     }
     
+    @Transactional
     public Vehicle updateVehicle(final Vehicle vehicle) {
         return vehicleRepository.save(vehicle);
     }
 
+    @Transactional
     public void deleteVehicle(long id) {
         vehicleRepository.deleteById(id);
     }
