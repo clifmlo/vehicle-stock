@@ -66,6 +66,5 @@ public class VehicleService {
     private String generateStockNumber() {
         Random rand = new Random();       
         return String.valueOf(1000000000 + (int) (rand.nextDouble() * 999999999)); 
-    }
-        
+    }     
 }

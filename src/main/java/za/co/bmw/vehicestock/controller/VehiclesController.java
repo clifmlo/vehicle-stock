@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import za.co.bmw.vehicestock.service.VehicleService;
 import za.co.bmw.vehicestock.dto.VehicleDto;
 import za.co.bmw.vehicestock.entity.Vehicle;
+import za.co.bmw.vehicestock.model.ApiError;
 
 /**
  *
@@ -37,7 +38,7 @@ public class VehiclesController {
         Vehicle vehicle = vehicleService.getVehicle(id);
         
         if (vehicle == null) {
-            return new ResponseEntity("Record not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new ApiError("404", "Record not found"), HttpStatus.NOT_FOUND);
         }
         
         return new ResponseEntity(vehicle, HttpStatus.OK);
@@ -51,6 +52,6 @@ public class VehiclesController {
     @DeleteMapping("delete/{id}")
     public ResponseEntity updateVehicle(@PathVariable("id") final long id){
         vehicleService.deleteVehicle(id);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity("Record deleted", HttpStatus.OK);
     } 
 }

@@ -2,6 +2,7 @@ package za.co.bmw.vehicestock.exception;
 
 import java.sql.SQLException;
 import javax.validation.ConstraintViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +55,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
     
     @ExceptionHandler(HttpServerErrorException.class)
-    public ResponseEntity<Object> handleHttpServerErrorException(HttpServerErrorException ex) {
+    public ResponseEntity<Object> handleHttpServerError(HttpServerErrorException ex) {
         return new ResponseEntity<>(new ApiError("ERROR", ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }  
+    
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public ResponseEntity<Object> handleEmptyResultDataAccess(EmptyResultDataAccessException ex) {
+        return new ResponseEntity<>(new ApiError("ERROR", "Record not found"), HttpStatus.NOT_FOUND);
     }   
 }

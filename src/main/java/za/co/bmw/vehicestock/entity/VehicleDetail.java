@@ -59,6 +59,5 @@ public class VehicleDetail implements Serializable {
     
     @UpdateTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime date_updated;
-    
+    private LocalDateTime date_updated; 
 }
