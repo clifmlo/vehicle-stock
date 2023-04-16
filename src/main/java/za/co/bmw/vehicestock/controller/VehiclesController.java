@@ -33,7 +33,14 @@ public class VehiclesController {
     
     @GetMapping("/{id}")
     public ResponseEntity getVehicle(@PathVariable("id") final long id){
-        return new ResponseEntity(vehicleService.getVehicle(id), HttpStatus.OK);
+        
+        Vehicle vehicle = vehicleService.getVehicle(id);
+        
+        if (vehicle == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        
+        return new ResponseEntity(vehicle, HttpStatus.OK);
     }
     
     @PutMapping("/update")

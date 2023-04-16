@@ -1,5 +1,6 @@
 package za.co.bmw.vehicestock.dto;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,21 +19,21 @@ public class VehicleDto {
     
     private long id;
     
-    @NotNull
+    @NotEmpty(message = "Model is required")
     private String model;
     
-    @NotNull
-    private int modelYear;
+    @NotNull(message = "Model year is required")
+    private Integer modelYear;
     
-    @NotNull
+    @NotEmpty(message = "Vin number is required")
     private String vinNumber;
     
-    @NotNull
+    @NotEmpty(message = "Engine number is required")
     private String engineNumber;
     
-    @NotNull
-    private double engineCapacity;
+    @NotNull(message = "Engine capacity is required")
+    private Double engineCapacity;
     
-    @NotNull
+    @NotEmpty(message = "Fuel type is required")
     private String fuelType;
 }

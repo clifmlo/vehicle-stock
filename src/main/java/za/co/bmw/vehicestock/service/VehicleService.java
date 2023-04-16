@@ -3,6 +3,7 @@ package za.co.bmw.vehicestock.service;
 import java.util.Optional;
 import java.util.Random;
 import javax.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.co.bmw.vehicestock.dto.VehicleDto;
@@ -14,6 +15,7 @@ import za.co.bmw.vehicestock.repo.VehicleRepository;
  *
  * @author cliff
  */
+@Slf4j
 @Service
 public class VehicleService {
     @Autowired
@@ -32,6 +34,7 @@ public class VehicleService {
         Optional<Vehicle> vehicle = vehicleRepository.findById(id);
         
         if (vehicle.isEmpty()){
+            log.info("No record found with id: {}", id);
             return null;
         }
         
@@ -46,6 +49,7 @@ public class VehicleService {
     @Transactional
     public void deleteVehicle(long id) {
         vehicleRepository.deleteById(id);
+        log.info("Deleted record id: {}", id);
     }
     
     private VehicleDetail buildVehicleDetails(final VehicleDto vehicleDto) {
