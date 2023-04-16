@@ -37,7 +37,7 @@ public class VehiclesController {
         Vehicle vehicle = vehicleService.getVehicle(id);
         
         if (vehicle == null) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Record not found", HttpStatus.NOT_FOUND);
         }
         
         return new ResponseEntity(vehicle, HttpStatus.OK);
